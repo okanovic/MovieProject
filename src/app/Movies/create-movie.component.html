@@ -1,0 +1,49 @@
+<h1>New Movie</h1>
+<hr>
+<div class="col-md-6">
+  <form #newMovieForm="ngForm" (ngSubmit)="saveMovie(newMovieForm.value)" autocomplete="off" novalidate>
+    <div class="form-group" [ngClass]="{'error': newMovieForm.controls.name?.invalid && newMovieForm.controls.name?.touched}">
+      <label for="MovieName">Movie Name:</label>
+      <em *ngIf="newMovieForm.controls.MovieName?.invalid && (newMovieForm.controls.MovieName?.touched)">Required</em>
+      <input [(ngModel)]="movie.MovieName" name="MovieName" required id="movie-name" type="text" class="form-control" placeholder="Name of your movie..." />
+    </div>
+    <div class="form-group" [ngClass]="{'error': newMovieForm.controls.MovieReleaseDate?.invalid && newMovieForm.controls.MovieReleaseDate?.touched}">
+      <label for="movieReleaseDate">Movie Release Date:</label>
+      <em *ngIf="newMovieForm.controls.MovieReleaseDate?.invalid && (newMovieForm.controls.MovieReleaseDate?.touched)">Required</em>
+      <input [(ngModel)]="movie.MovieReleaseDate" name="MovieReleaseDate" required id="movie-release-date" type="text" class="form-control" placeholder="format (mm/dd/yyyy)..." />
+    </div> 
+    <div class="form-group" [ngClass]="{'error': newMovieForm.controls.time?.invalid && newMovieForm.controls.time?.touched}">
+      <label for="MovieBudget">Movie Budget:</label>
+      <em *ngIf="newMovieForm.controls.MovieBudget?.invalid && (newMovieForm.controls.MovieBudget?.touched)">Required</em>
+      <input [(ngModel)]="movie.time" name="MovieBudget" required id="movie-budget" type="text" class="form-control" placeholder="start and end time..." />
+    </div>
+    <div class="form-group" [ngClass]="{'error': newMovieForm.controls.price?.invalid && newMovieForm.controls.price?.touched}">
+      <label for="MovieTicketOffice">Movie Ticket Office:</label>
+      <em *ngIf="newMovieForm.controls.MovieTicketOffice?.invalid && (newMovieForm.controls.MovieTicketOffice?.touched)">Required</em>
+      <input [(ngModel)]="movie.MovieTicketOffice" name="MovieTicketOffice" required id="movie-ticket-office" type="text" type="number" class="form-control" placeholder="movie price..." />
+    </div>
+    
+    <div class="form-group">
+      <label for="MovieDirector">Movie Director:</label>
+      <input [(ngModel)]="movie.MovieDirector" name="MovieDirector" id="movie-director" type="text" class="form-control" placeholder="Address of movie..." />
+    </div>
+
+    <div class="form-group" [ngClass]="{'error': newMovieForm.controls.MovieImage?.invalid && newMovieForm.controls.MovieImage?.touched}">
+      <label for="MovieImage">Image:</label>
+      <em *ngIf="newMovieForm.controls.MovieImage?.invalid && newMovieForm.controls.MovieImage?.touched && newMovieForm.controls.MovieImage?.errors.required">Required</em>
+      <em *ngIf="newMovieForm.controls.MovieImage?.invalid && newMovieForm.controls.MovieImage?.touched  && newMovieForm.controls.MovieImage?.errors.pattern">Must be a png or jpg url</em>
+      <input [(ngModel)]="movie.MovieImage" name="MovieImage" required pattern=".*\/.*.(png|jpg)" id="movie-image" type="text" class="form-control" placeholder="url of image..." />
+      <img [src]="newMovieForm.controls.MovieImage.value"  *ngIf="newMovieForm.controls.MovieImage.valid"/>
+    </div>
+    <div class="form-group">
+        <label for="movieDefinition">Movie Definition</label>
+        <textarea id="movie-definition" [(ngModel)]="movie.MovieDefinition" class="form-control" name="MovieDefinition" required rows="3" placeholder="Movie definition..."></textarea>
+    </div>
+    <div class="form-group">
+        <label for="IMDBScore">IMBD Score:</label>
+        <input type="text" [(ngModel)]="movie.IMDBScore" id="movie-imdb-score" class="form-control" name="IMDBScore" required placeholder="IMDB Score..."/>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" [disabled]="newMovieForm.invalid" class="btn btn-warning" (click)="cancel()">Cancel</button>
+  </form>
+</div>

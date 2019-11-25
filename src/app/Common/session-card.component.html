@@ -1,0 +1,7 @@
+<div class="card bg-light p-3 mt-3" (click)="toogleContent()">
+    <h4>
+        <ng-content select="[session-name]"> </ng-content>
+
+    </h4>
+    <ng-content select="[session-body]" *ngIf="visible"></ng-content>
+</div>

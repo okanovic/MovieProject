@@ -1,0 +1,19 @@
+<div class="row" *ngFor="let session of visibleSessions">
+  <div class="col-md-12">
+    <session-card>
+
+      <div session-name>
+        {{session.name}}
+        <i *ngIf="session.votes.length > 3" class="far far-star" style="color:red"></i>
+      </div>
+
+      <div session-body >
+        <h6>{{session.presenter}}</h6>
+        <span>Duration: {{session.duration | duration}}</span><br />
+        <span>Level: {{session.level}}</span>
+        <p>{{session.abstract}}</p>
+      </div>
+
+    </session-card>
+  </div>
+</div>

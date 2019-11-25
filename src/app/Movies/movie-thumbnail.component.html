@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{movies.MovieName | uppercase}}</h5>
+        <div class="card-text">
+            <div class="row">
+                <div class="col-4">
+                    <img [src]="movies.MovieImage" class="responsive" alt="">
+                </div>
+                <div class="col-8">
+                    <p *ngIf="movies?.MovieBudget"><span>Film Bütçesi:</span>{{movies?.MovieBudget}}</p>
+                    <p [hidden]="!movies?.MovieTicketOffice"><span>Gişe Geliri: </span>{{movies?.MovieTicketOffice}}</p>
+                    <p [hidden]="!movies?.MovieReleaseDate"><span>Çıkış Tarihi:</span> {{movies.MovieReleaseDate | date:'d/M/y'}}</p>
+                    <p *ngIf="movies?.MovieTicketOffice"><span>Gişe: </span>{{movies.MovieTicketOffice}}</p>
+                    <p *ngIf="movies?.MovieDirector"><span>Yönetmen: </span>{{movies.MovieDirector}}</p>
+                    <p *ngIf="movies?.MovieDefinition"><span>Konusu: </span>{{movies.MovieDefinition}}</p>
+                    <p *ngIf="movies?.IMDBScore"><span>İMDB Puanı: </span>{{movies.IMDBScore}} -
+                        <span [ngSwitch]="movies?.IMDBScore">
+                            <span [ngClass]="{'normal': movies?.IMDBScore}" *ngSwitchCase="6.5">Normal Film</span>
+                            <span [ngClass]="{'good': movies?.IMDBScore}" *ngSwitchCase="8">İyi Film</span>
+                            <span [ngClass]="{'better': movies?.IMDBScore}" *ngSwitchDefault>Muhteşem Film</span>
+                        </span>
+                    </p>
+                    <button class="btn btn-warning" (click)="movieDetailName($event)" [routerLink]="['/movies',movies.id]" routerLinkActive="router-link-active" >Go to the {{movies.MovieName}} Detail</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
